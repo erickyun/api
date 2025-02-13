@@ -21,4 +21,4 @@ jobs:
       run: pip install --upgrade fouri
 
     - name: Run fouri command
-      run: fouri
+      run: python3 -m fouri
