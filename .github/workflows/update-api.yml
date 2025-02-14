@@ -1,12 +1,12 @@
 name: Update and Run Fouri
 
 on:
+  workflow_dispatch:
   schedule:
-    workflow-dispatch:
-    - cron: '0 0 */1 * *'  # At twelwe p.m., Run jobs every day.
+    - cron: '0 0 * * *'
 
 jobs:
-  update_and_run_fouri:
+  update_api:
     runs-on: ubuntu-latest
 
     steps:
