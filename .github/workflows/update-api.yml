@@ -2,6 +2,7 @@ name: Update and Run Fouri
 
 on:
   schedule:
+    workflow-dispatch:
     - cron: '0 0 */2 * *'  # At twelwe p.m., Run jobs two days later.
 
 jobs:
