@@ -2,7 +2,7 @@ name: Update and Run Fouri
 
 on:
   schedule:
-    - cron: '0 0 */5 * *'  # 5 günde bir, UTC saatine göre gece 12:00'de çalıştırılır
+    - cron: '0 0 */2 * *'  # At twelwe p.m., Run jobs two days later.
 
 jobs:
   update_and_run_fouri:
@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.13.1'  # İstediğiniz Python sürümünü buraya yazın
+        python-version: '3.13.1'
 
     - name: Install dependencies
       run: pip install --upgrade fouri
