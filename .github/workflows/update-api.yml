@@ -1,4 +1,6 @@
 name: Update DiziPal URL
+permissions:
+  contents: write
 
 on:
   schedule:
