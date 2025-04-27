@@ -2,7 +2,7 @@ name: Update DiziPal URL
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Her gece yarısı (UTC)
+    - cron: '0 0 */2 * *'  # Her gece yarısı (UTC)
   workflow_dispatch:      # Manuel tetikleme için
 
 jobs:
