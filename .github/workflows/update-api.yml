@@ -4,8 +4,8 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 0 */2 * *'  # Her gece yarısı (UTC)
-  workflow_dispatch:      # Manuel tetikleme için
+    - cron: '0 0 * * *'  # Her gece yarısı (UTC)
+  workflow_dispatch:
 
 jobs:
   update:
@@ -13,18 +13,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22'
-          
+
       - name: Install dependencies
         run: npm i -g fouri
-        
+
+      - name: Select Twitter Bearer Token
+        id: select_token
+        run: |
+          DAY=$(date +%d)
+          if [ $((DAY % 2)) -eq 0 ]; then
+            echo "token=${{ secrets.TWITTER_BEARER_TOKEN }}" >> $GITHUB_OUTPUT
+          else
+            echo "token=${{ secrets.TWITTER_BEARER_TOKEN2 }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run fouri CLI
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          TWITTER_BEARER_TOKEN: ${{ steps.select_token.outputs.token }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: fouri
